@@ -1,0 +1,5 @@
+<form action="/edit_student/{{ student._id }}" method="POST">
+  <input type="text" placeholder="name" name="name" value={{ student.name }}>
+  <input type="number" placeholder="roll" name="roll" value={{ student.roll }}>
+  <button>Make changes!</button>
+</form>

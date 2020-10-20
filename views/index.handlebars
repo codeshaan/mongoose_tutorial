@@ -1,0 +1,46 @@
+<h1>This is the home page</h1>
+
+<form action="/process" method="POST">
+  <input type="text" id="name" placeholder="name" name="name">
+  <input type="number" id="roll" placeholder="roll" name="roll">
+  <button id="btn" disabled="true">Submit</button>
+</form>
+
+<h4 style="color: red;">{{ err }}</h4>
+
+
+{{#if students}}
+
+  <h1>Already registered students</h1>
+  {{#each students}}
+    <div style="margin: 1rem 0; width: 80%; margin: 2rem auto; display: flex; justify-content: space-between;">
+      <a href="/student/{{ this._id }}">{{ this.name }} - {{this.roll}} </a>
+      <a href="/edit/{{ this._id }}">Edit</a>
+      <a href="/delete/{{ this._id }}">&times;</a>
+    </div>
+  {{/each}}
+
+  {{else}}
+    <p>No Students have registered yet!!</p>
+
+{{/if}}
+
+{{#section 'script'}}
+  <script>
+    const name = document.querySelector("#name");
+    const roll = document.querySelector("#roll");
+    const submitBtn = document.querySelector("#btn");
+
+    name.addEventListener('keyup', check);
+    roll.addEventListener('keyup', check);
+
+    function check() {
+      if (!name.value || !roll.value) {
+        submitBtn.setAttribute('disabled', 'true')
+      } else {
+        submitBtn.removeAttribute('disabled')
+      }
+    }
+
+  </script>
+{{/section}}
